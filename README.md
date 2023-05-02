@@ -126,6 +126,25 @@ for (i: num = 0; i < 5; i = i + 1) {
 }
 ```
 
+Fire's additional `for` loop syntax makes looping over lists a breeze.
+
+```fire
+x: fruits<str> = ['Banana', 'Apple', 'Orange'];
+
+// Iterate over the indexes of fruits and print them.
+for(i: num in fruits){
+   print(i);
+}
+
+// Iterate over the elements of fruits and print them.
+for(fruit: str of fruits){
+    print(fruit);
+}
+```
+
+
+These `for` loop examples demonstrate how Fire makes it easy to work with lists, providing intuitive syntax for both index-based and element-based iterations.
+
 ### While Loop
 
 `while` loop can be used to execute a block of code as long as a specified condition is true.
@@ -134,7 +153,7 @@ for (i: num = 0; i < 5; i = i + 1) {
 i: num = 0;
 while (i < 5) {
   print(i);
-  i = i + 1;
+  i += 1;
 }
 ```
 
