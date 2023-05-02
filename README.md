@@ -134,7 +134,7 @@ if (x > 5) => log('x is greater than 5');
 `for` loop in Fire allows you to execute a block of code a number of times.
 
 ```typescript
-for (let i:num = 0 to 5) => log(i);
+for (let i:num = 0 < 5) => log(i);
 ```
 
 Fire's additional `for` loop syntax makes looping over lists a breeze.
@@ -157,8 +157,7 @@ These `for` loop examples demonstrate how Fire makes it easy to work with lists,
 `while` loop can be used to execute a block of code as long as a specified condition is true.
 
 ```typescript
-let i: num = 0;
-while (i < 5) {
+while (let i: num = 0 < 5) {
   log(i);
   i += 1;
 }
