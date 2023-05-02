@@ -278,6 +278,7 @@ Example:
 ```typescript
 let numbers: list<num> = [1, 2, 3, 4, 5];
 let minimum: num = min(numbers);  // minimum will be 1
+```
 
 ### Round
 
