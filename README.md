@@ -17,8 +17,10 @@ Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL d
 11. [For loop](#for-loop)
 12. [While Loop](#While-Loop)
 13. [Switch statement](#switch-statement)
-14. [Contributing](#contributing)
-15. [License](#license)
+14. [Function Declaration](#function-declaration)
+15. [Error Handling](#error-handling)
+16. [Contributing](#contributing)
+17. [License](#license)
 
 ## Installation
 
@@ -98,7 +100,7 @@ x: list<map<str, any>> = collect('countries').where(('population') > 1000000 && 
 ### Ordering results
 
 ```fire
-x: list<map<str, any>> = collect('countries').orderBy('population', descending: true).limit(10);
+x: list<map<str, any>> = collect('countries').order('population', descending: true).limit(10);
 ```
 
 ## Control flow statements
@@ -121,7 +123,7 @@ if (x > 5) {
 `for` loop in Fire allows you to execute a block of code a number of times.
 
 ```fire
-for (i: num = 0; i < 5; i = i + 1) {
+for (i:num from 0 to 5) {
   print(i);
 }
 ```
@@ -176,6 +178,57 @@ switch (x) {
 ```
 Please note that these are the basic syntax examples. Depending on the exact capabilities and features of Fire, there might be variations and additional options available.
 
+### Function Declaration
+
+Functions in Fire are declared using the `fn` keyword, followed by the function name, parameters, return type, and the function body enclosed in curly braces `{}`. 
+
+Here is the general syntax:
+
+```fire
+fn function_name(parameter: type, ...) -> return_type {
+    // Function body
+}
+```
+
+For example, a function to add two numbers would look like this:
+
+```fire
+fn add(a: num, b: num) -> num {
+    return a + b;
+}
+```
+
+### Error Handling
+
+Error handling in Fire is done using the `throw` and `try-catch` statements. 
+
+- The `throw` statement is used to raise an exception.
+- The `try-catch` block is used to catch and handle exceptions.
+
+Here is an example of a function that throws an exception if the denominator is zero:
+
+```fire
+fn divide(numerator: num, denominator: num) -> num {
+    if (denominator == 0) {
+        throw Exception('Denominator cannot be zero');
+    } else {
+        return numerator / denominator;
+    }
+}
+```
+
+To catch and handle this exception, you would use a `try-catch` block:
+
+```fire
+try {
+    var result = divide(10, 0);
+} catch(e) {
+    print(e);
+}
+```
+
+In this example, if an exception is thrown in the `try` block, the control is passed to the `catch` block, where the exception is handled by printing the error message.
+
 ## Contributing
 
 [Information about how to contribute to the project.]
@@ -183,3 +236,6 @@ Please note that these are the basic syntax examples. Depending on the exact cap
 ## License
 
 [License information.]
+
+
+
