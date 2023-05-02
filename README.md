@@ -110,10 +110,10 @@ The `if` statement in Fire can be used to execute a block of code only if a spec
 ```typescript
 x: num = 10;
 if (x > 5) {
-  print('x is greater than 5');
+  log('x is greater than 5');
 }
 
-if (x > 5) => print('x is greater than 5');
+if (x > 5) => log('x is greater than 5');
 ```
 
 ### For Loop
@@ -121,7 +121,7 @@ if (x > 5) => print('x is greater than 5');
 `for` loop in Fire allows you to execute a block of code a number of times.
 
 ```typescript
-for (let i:num = 0 to 5) => print(i);
+for (let i:num = 0 to 5) => log(i);
 ```
 
 Fire's additional `for` loop syntax makes looping over lists a breeze.
@@ -129,11 +129,11 @@ Fire's additional `for` loop syntax makes looping over lists a breeze.
 ```typescript
 let x: fruits<str> = ['Banana', 'Apple', 'Orange'];
 
-// Iterate over the indexes of fruits and print them.
-for(i: num in fruits) => print(i);
+// Iterate over the indexes of fruits and log them.
+for(i: num in fruits) => log(i);
 
-// Iterate over the elements of fruits and print them.
-for(fruit: str of fruits) => print(fruit);
+// Iterate over the elements of fruits and log them.
+for(fruit: str of fruits) => log(fruit);
 ```
 
 
@@ -146,7 +146,7 @@ These `for` loop examples demonstrate how Fire makes it easy to work with lists,
 ```typescript
 let i: num = 0;
 while (i < 5) {
-  print(i);
+  log(i);
   i += 1;
 }
 ```
@@ -158,25 +158,25 @@ The `see` statement is used to select one of many code blocks to be executed.
 ```typescript
 let x: str = 'banana';
 see (x) {
-  case ('apple') => print('Apple is $1');
-  case ('banana') => print('Banana is $2');
-  print('Unknown fruit');
+  case ('apple') => log('Apple is $1');
+  case ('banana') => log('Banana is $2');
+  log('Unknown fruit');
 }
 ```
 Please note that these are the basic syntax examples. Depending on the exact capabilities and features of Fire, there might be variations and additional options available.
 
 ### Function Declaration
 
-Functions in Fire are declared using the `fun` keyword, followed by the function name, parameters, return type, and the function body enclosed in curly braces `{}`. 
+Functions in Fire are declared using the `func` keyword, followed by the function name, parameters, return type, and the function body enclosed in curly braces `{}`. 
 
 For example, a function to add two numbers would look like this:
 
 ```typescript
-fun add(a: num, b: num): num => return a + b;
+func add(a: num, b: num): num => return a + b;
 ```
 
 ```typescript
-fun add(a: num, b: num): num {
+func add(a: num, b: num): num {
   let result: num = sum(a+b);  
   return result;
 }
@@ -192,22 +192,17 @@ Error handling in Fire is done using the `throw` and `try-catch` statements.
 Here is an example of a function that throws an exception if the denominator is zero:
 
 ```typescript
-fun divide(numerator: num, denominator: num): num {
-    if (denominator == 0) {
-        throw Exception('Denominator cannot be zero');
-    } else {
-        return numerator / denominator;
-    }
+func divide(numerator: num, denominator: num): num {
+    if (denominator == 0) => throw Exception('Denominator cannot be zero');
+    else => return numerator / denominator;
 }
 ```
 
 To catch and handle this exception, you would use a `try-catch` block:
 
 ```typescript
-try {
-    let result:num = divide(10, 0);
-} catch(e) {
-    print(e);
+try => let result:num = divide(10, 0);
+catch(e) => log(e);
 }
 ```
 
