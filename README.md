@@ -111,7 +111,7 @@ let x: list<map<str, any>> = collect('countries').sort('population', method: Sor
 
 ## Control flow statements
 
-Fire also supports essential control flow statements like `if`, `for`, `while`, and `switch` to provide more flexibility and control over your operations.
+Fire also supports essential control flow statements like `if`, `for`, `while`, and `see` to provide more flexibility and control over your operations.
 
 ### If statement
 
