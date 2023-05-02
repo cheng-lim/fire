@@ -32,75 +32,71 @@ Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL d
 
 Fire supports several fundamental data types:
 
-```fire
+```typescript
 // Numbers (both integers and floats)
-exampleNum: num = 123.45;
+let x: num = 123.45;
 
 // String and character data
-exampleStr: str = 'Hello, Fire!';
+let x: str = 'Hello, Fire!';
 
 // Boolean values
-exampleBool: bool = true;
+let x: bool = true;
 
 // Lists (arrays) of values
-exampleList: list<num> = [1, 2, 3, 4, 5];
+let x: list<num> = [1, 2, 3, 4, 5];
 
 // Maps (dictionaries or objects) of key-value pairs
-exampleMap: map<str, num> = {'one': 1, 'two': 2, 'three': 3};
+let x: map<str, num> = {'one': 1, 'two': 2, 'three': 3};
 
 // Dynamic type
-exampleAny: any = 'I can be anything!';
+let x: any = 'I can be anything!';
 ```
 
 ### Variable Declaration
 
 Variables in Fire are declared by specifying the variable name, followed by a colon, the type, and an optional initial value.
 
-```fire
-x: str = '123'; // variable x is assigned the string value of '123'
+```typescript
+let x: str = '123'; // variable x is assigned the string value of '123'
 ```
 
 ### Querying
 
 Fire queries are simple and straightforward. Use the `collect` function followed by the `doc` function to fetch a document from a collection.
 
-```fire
-x: map<str, any> = collect('countries').doc('Japan'); // Fetches all the fields in the 'Japan' document.
+```typescript
+let x: map<str, any> = collect('countries').doc('Japan'); // Fetches all the fields in the 'Japan' document.
 ```
 
 ### Conditional Query
 
 Filter documents based on conditions with Fire. Apply conditions to specific fields in the documents.
 
-```fire
-x: list<map<str, any>> = collect('countries').field('phone') >= 12 ?? null; // Selects all documents where the 'phone' field is greater than or equal to 12.
+```typescript
+let x: list<map<str, any>> = collect('countries').field('phone') >= 12 ?? null; // Selects all documents where the 'phone' field is greater than or equal to 12.
+
+let x: list<map<str, any>> = collect('countries').where(('population') > 1000000 && ('continent') == 'Asia');
 ```
 
 ### Updating
 
 Update the fields in a document with Fire easily.
 
-```fire
-collect('countries').doc('Japan').update({'phone':81}); // Updates the 'phone' field in the 'Japan' document to 81.
+```typescript
+collect('countries').doc('Japan').set({'phone':81}); // Updates the 'phone' field in the 'Japan' document to 81.
 ```
 
 ### Creating a new document
 
-```fire
+```typescript
 newCountry: map<str, any> = {'name': 'New Country', 'population': 1000};
 collect('countries').add(newCountry);
 ```
 
-### Filtering with multiple conditions
-
-```fire
-x: list<map<str, any>> = collect('countries').where(('population') > 1000000 && ('continent') == 'Asia');
-```
-
 ### Ordering results
 
-```fire
-x: list<map<str, any>> = collect('countries').order('population', descending: true).limit(10);
+```typescript
+x: list<map<str, any>> = collect('countries').sort('population', method: Sort.descending).limit(10);
 ```
 
 ## Control flow statements
@@ -111,37 +107,33 @@ Fire also supports essential control flow statements like `if`, `for`, `while`, 
 
 The `if` statement in Fire can be used to execute a block of code only if a specified condition is true.
 
-```fire
+```typescript
 x: num = 10;
 if (x > 5) {
   print('x is greater than 5');
 }
+
+if (x > 5) => print('x is greater than 5');
 ```
 
 ### For Loop
 
 `for` loop in Fire allows you to execute a block of code a number of times.
 
-```fire
-for (i:num from 0 to 5) {
-  print(i);
-}
+```typescript
+for (let i:num = 0 to 5) => print(i);
 ```
 
 Fire's additional `for` loop syntax makes looping over lists a breeze.
 
-```fire
-x: fruits<str> = ['Banana', 'Apple', 'Orange'];
+```typescript
+let x: fruits<str> = ['Banana', 'Apple', 'Orange'];
 
 // Iterate over the indexes of fruits and print them.
-for(i: num in fruits){
-   print(i);
-}
+for(i: num in fruits) => print(i);
 
 // Iterate over the elements of fruits and print them.
-for(fruit: str of fruits){
-    print(fruit);
-}
+for(fruit: str of fruits) => print(fruit);
 ```
 
 
@@ -151,50 +143,42 @@ These `for` loop examples demonstrate how Fire makes it easy to work with lists,
 
 `while` loop can be used to execute a block of code as long as a specified condition is true.
 
-```fire
-i: num = 0;
+```typescript
+let i: num = 0;
 while (i < 5) {
   print(i);
   i += 1;
 }
 ```
 
-### Switch Statement
+### See Statement
 
-The `switch` statement is used to select one of many code blocks to be executed.
+The `see` statement is used to select one of many code blocks to be executed.
 
-```fire
-x: str = 'banana';
-switch (x) {
-  case 'apple':
-    print('Apple is $1');
-    break;
-  case 'banana':
-    print('Banana is $2');
-    break;
-  default:
-    print('Unknown fruit');
+```typescript
+let x: str = 'banana';
+see (x) {
+  case ('apple') => print('Apple is $1');
+  case ('banana') => print('Banana is $2');
+  print('Unknown fruit');
 }
 ```
 Please note that these are the basic syntax examples. Depending on the exact capabilities and features of Fire, there might be variations and additional options available.
 
 ### Function Declaration
 
-Functions in Fire are declared using the `fn` keyword, followed by the function name, parameters, return type, and the function body enclosed in curly braces `{}`. 
-
-Here is the general syntax:
-
-```fire
-fn function_name(parameter: type, ...) -> return_type {
-    // Function body
-}
-```
+Functions in Fire are declared using the `fun` keyword, followed by the function name, parameters, return type, and the function body enclosed in curly braces `{}`. 
 
 For example, a function to add two numbers would look like this:
 
-```fire
-fn add(a: num, b: num) -> num {
-    return a + b;
+```typescript
+fun add(a: num, b: num): num => return a + b;
+```
+
+```typescript
+fun add(a: num, b: num): num {
+  let result: num = sum(a+b);  
+  return result;
 }
 ```
 
@@ -207,8 +191,8 @@ Error handling in Fire is done using the `throw` and `try-catch` statements.
 
 Here is an example of a function that throws an exception if the denominator is zero:
 
-```fire
-fn divide(numerator: num, denominator: num) -> num {
+```typescript
+fun divide(numerator: num, denominator: num): num {
     if (denominator == 0) {
         throw Exception('Denominator cannot be zero');
     } else {
@@ -219,9 +203,9 @@ fn divide(numerator: num, denominator: num) -> num {
 
 To catch and handle this exception, you would use a `try-catch` block:
 
-```fire
+```typescript
 try {
-    var result = divide(10, 0);
+    let result:num = divide(10, 0);
 } catch(e) {
     print(e);
 }
