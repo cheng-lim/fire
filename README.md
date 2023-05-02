@@ -19,7 +19,7 @@ Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL d
 13. [Switch statement](#switch-statement)
 14. [Function Declaration](#function-declaration)
 15. [Sum](#sum)
-16 [Length](#length)
+16. [Length](#length)
 17. [Average](#average)
 18. [Absolute](#absolute)
 19. [Integer](#integer)
