@@ -1,6 +1,6 @@
 # Fire Query Language
 
-Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL databases such as Firebase Firestore. Drawing inspiration from TypeScript and Dart, Fire simplifies querying by introducing an easy-to-learn syntax that is meant to feel intuitive to software engineers.
+Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL databases such as Firebase Firestore. Drawing inspiration from Python, TypeScript and Dart, Fire simplifies querying by introducing an easy-to-learn syntax that is meant to feel intuitive to software engineers.
 
 ## Table of Contents
 
@@ -17,7 +17,9 @@ Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL d
 
 [Instructions for installing and setting up Fire.]
 
-## Data Types
+## Syntax
+
+### Data Types
 
 Fire supports several fundamental data types:
 
@@ -41,7 +43,7 @@ exampleMap: map<str, num> = {'one': 1, 'two': 2, 'three': 3};
 exampleAny: any = 'I can be anything!';
 ```
 
-## Variable Declaration
+### Variable Declaration
 
 Variables in Fire are declared by specifying the variable name, followed by a colon, the type, and an optional initial value.
 
@@ -49,7 +51,7 @@ Variables in Fire are declared by specifying the variable name, followed by a co
 x: str = '123'; // variable x is assigned the string value of '123'
 ```
 
-## Querying
+### Querying
 
 Fire queries are simple and straightforward. Use the `collect` function followed by the `doc` function to fetch a document from a collection.
 
@@ -57,7 +59,7 @@ Fire queries are simple and straightforward. Use the `collect` function followed
 x: map<str, any> = collect('countries').doc('Japan'); // Fetches all the fields in the 'Japan' document.
 ```
 
-## Conditional Query
+### Conditional Query
 
 Filter documents based on conditions with Fire. Apply conditions to specific fields in the documents.
 
@@ -65,15 +67,13 @@ Filter documents based on conditions with Fire. Apply conditions to specific fie
 x: list<map<str, any>> = collect('countries').field('phone') >= 12 ?? null; // Selects all documents where the 'phone' field is greater than or equal to 12.
 ```
 
-## Updating
+### Updating
 
 Update the fields in a document with Fire easily.
 
 ```fire
 collect('countries').doc('Japan').update({'phone':81}); // Updates the 'phone' field in the 'Japan' document to 81.
 ```
-
-## Additional Syntax Examples
 
 ### Filtering with multiple conditions
 
@@ -93,6 +93,62 @@ x: list<map<str, any>> = collect('countries').orderBy('population', descending: 
 newCountry: map<str, any> = {'name': 'New Country', 'population': 1000};
 collect('countries').add(newCountry);
 ```
+
+### Control Flow Statements
+
+Fire also supports essential control flow statements like `if`, `for`, `while`, and `switch` to provide more flexibility and control over your operations.
+
+### If Statement
+
+The `if` statement in Fire can be used to execute a block of code only if a specified condition is true.
+
+```fire
+x: num = 10;
+if (x > 5) {
+  print('x is greater than 5');
+}
+```
+
+### For Loop
+
+`for` loop in Fire allows you to execute a block of code a number of times.
+
+```fire
+for (i: num = 0; i < 5; i = i + 1) {
+  print(i);
+}
+```
+
+### While Loop
+
+`while` loop can be used to execute a block of code as long as a specified condition is true.
+
+```fire
+i: num = 0;
+while (i < 5) {
+  print(i);
+  i = i + 1;
+}
+```
+
+### Switch Statement
+
+The `switch` statement is used to select one of many code blocks to be executed.
+
+```fire
+x: str = 'banana';
+switch (x) {
+  case 'apple':
+    print('Apple is $1');
+    break;
+  case 'banana':
+    print('Banana is $2');
+    break;
+  default:
+    print('Unknown fruit');
+}
+```
+Please note that these are the basic syntax examples. Depending on the exact capabilities and features of Fire, there might be variations and additional options available.
 
 ## Contributing
 
