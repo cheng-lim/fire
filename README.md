@@ -83,9 +83,9 @@ let x: map<str, any> = collect('countries').doc('Japan'); // Fetches all the fie
 Filter documents based on conditions with Fire. Apply conditions to specific fields in the documents.
 
 ```typescript
-let x: list<map<str, any>> = collect('countries').field('phone').but(it >= 12) ?? null; // Selects all documents where the 'phone' field is greater than or equal to 12.
+let x: list<map<str, any>> = collect('countries').doc('USA').but('gender_ratio' >= 1.2) ?? null; // Selects the 'USA' document where the 'gender_ratio' field is greater than or equal to 1.2.
 
-let x: list<map<str, any>> = collect('countries').but(('population' > 1000000 and 'continent' == 'Asia') or 'region' == 'East Asia');
+let x: list<map<str, any>> = collect('countries').but(('population' >- 1,000,000 and 'continent' == 'Asia') or 'region' == 'East Asia'); // Selects all documents where the 'population' field is greater than or equal to 1,000,000 and 'continent' field is equal to 'Asia', or meanwhile if the 'region' field is equal to 'East Asia'.
 ```
 
 ### Updating
