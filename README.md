@@ -98,14 +98,14 @@ collect('countries').doc('Japan').set({'phone':81}); // Updates the 'phone' fiel
 ### Creating a new document
 
 ```typescript
-newCountry: map<str, any> = {'name': 'New Country', 'population': 1000};
+let newCountry: map<str, any> = {'name': 'New Country', 'population': 1000};
 collect('countries').add(newCountry);
 ```
 
 ### Ordering results
 
 ```typescript
-x: list<map<str, any>> = collect('countries').sort('population', method: Sort.descending).limit(10);
+let x: list<map<str, any>> = collect('countries').sort('population', method: Sort.descending).limit(10);
 ```
 
 ## Control flow statements
@@ -117,7 +117,7 @@ Fire also supports essential control flow statements like `if`, `for`, `while`, 
 The `if` statement in Fire can be used to execute a block of code only if a specified condition is true.
 
 ```typescript
-x: num = 10;
+let x: num = 10;
 if (x > 5) {
   log('x is greater than 5');
 }
