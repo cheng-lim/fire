@@ -10,8 +10,15 @@ Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL d
 4. [Querying](#querying)
 5. [Conditional Query](#conditional-query)
 6. [Updating](#updating)
-7. [Contributing](#contributing)
-8. [License](#license)
+7. [Creating a new document](#creating a new document)
+8. [Filtering with multiple conditions](#filtering with multiple conditions)
+9. [Ordering results](#ordering results)
+10. [If statement](#If statement)
+11. [For loop](#for loop)
+12. [While Loop](#While Loop)
+13. [Switch statement](#switch statement)
+14. [Contributing](#contributing)
+15. [License](#license)
 
 ## Installation
 
@@ -75,6 +82,13 @@ Update the fields in a document with Fire easily.
 collect('countries').doc('Japan').update({'phone':81}); // Updates the 'phone' field in the 'Japan' document to 81.
 ```
 
+### Creating a new document
+
+```fire
+newCountry: map<str, any> = {'name': 'New Country', 'population': 1000};
+collect('countries').add(newCountry);
+```
+
 ### Filtering with multiple conditions
 
 ```fire
@@ -87,18 +101,11 @@ x: list<map<str, any>> = collect('countries').where(('population') > 1000000 && 
 x: list<map<str, any>> = collect('countries').orderBy('population', descending: true).limit(10);
 ```
 
-### Creating a new document
-
-```fire
-newCountry: map<str, any> = {'name': 'New Country', 'population': 1000};
-collect('countries').add(newCountry);
-```
-
-### Control Flow Statements
+## Control flow statements
 
 Fire also supports essential control flow statements like `if`, `for`, `while`, and `switch` to provide more flexibility and control over your operations.
 
-### If Statement
+### If statement
 
 The `if` statement in Fire can be used to execute a block of code only if a specified condition is true.
 
