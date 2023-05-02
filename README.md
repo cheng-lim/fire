@@ -75,7 +75,7 @@ Filter documents based on conditions with Fire. Apply conditions to specific fie
 ```typescript
 let x: list<map<str, any>> = collect('countries').field('phone') >= 12 ?? null; // Selects all documents where the 'phone' field is greater than or equal to 12.
 
-let x: list<map<str, any>> = collect('countries').where(('population') > 1000000 && ('continent') == 'Asia');
+let x: list<map<str, any>> = collect('countries').if(('population' > 1000000 and 'continent' == 'Asia') or 'region' == 'East Asia');
 ```
 
 ### Updating
