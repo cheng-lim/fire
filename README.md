@@ -198,8 +198,8 @@ The `sum()` function is used to calculate the sum of all numbers in a given list
 Example:
 
 ```typescript
-numbers: list<num> = [1, 2, 3, 4, 5];
-total: num = sum(numbers);  // total will be 15
+let numbers: list<num> = [1, 2, 3, 4, 5];
+let total: num = sum(numbers);  // total will be 15
 ```
 
 ### Length
@@ -209,8 +209,8 @@ The `len()` function is used to get the length of a given list or string.
 Example:
 
 ```typescript
-name: str = 'Fire';
-length: num = len(name);  // length will be 4
+let name: str = 'Fire';
+let length: num = len(name);  // length will be 4
 ```
 
 ### Average
@@ -220,8 +220,8 @@ The `avg()` function is used to calculate the average of all numbers in a given 
 Example:
 
 ```typescript
-numbers: list<num> = [1, 2, 3, 4, 5];
-average: num = avg(numbers);  // average will be 3
+let numbers: list<num> = [1, 2, 3, 4, 5];
+let average: num = avg(numbers);  // average will be 3
 ```
 
 ### Absolute
@@ -231,8 +231,8 @@ The `abs()` function is used to get the absolute value of a number.
 Example:
 
 ```typescript
-negativeNumber: num = -10;
-absolute: num = abs(negativeNumber);  // absolute will be 10
+let negativeNumber: num = -10;
+let absolute: num = abs(negativeNumber);  // absolute will be 10
 ```
 
 ### Integer
@@ -242,8 +242,8 @@ The `int()` function is used to convert a value into an integer.
 Example:
 
 ```typescript
-number: num = 3.14;
-integer: num = int(number);  // integer will be 3
+let number: num = 3.14;
+let integer: num = int(number);  // integer will be 3
 ```
 
 ### String
@@ -253,8 +253,8 @@ The `str()` function is used to convert a value into a string.
 Example:
 
 ```typescript
-number: num = 123;
-string: str = str(number);  // string will be '123'
+let number: num = 123;
+let string: str = str(number);  // string will be '123'
 ```
 
 ### Max
@@ -264,8 +264,8 @@ The `max()` function is used to get the maximum value in a list of numbers.
 Example:
 
 ```typescript
-numbers: list<num> = [1, 2, 3, 4, 5];
-maximum: num = max(numbers);  // maximum will be 5
+let numbers: list<num> = [1, 2, 3, 4, 5];
+let maximum: num = max(numbers);  // maximum will be 5
 ```
 
 ### Min
@@ -275,8 +275,8 @@ The `min()` function is used to get the minimum value in a list of numbers.
 Example:
 
 ```typescript
-numbers: list<num> = [1, 2, 3, 4, 5];
-minimum: num = min(numbers);  // minimum will be 1
+let numbers: list<num> = [1, 2, 3, 4, 5];
+let minimum: num = min(numbers);  // minimum will be 1
 ```
 
 ### Type
@@ -286,8 +286,8 @@ The `type()` function is used to get the data type of a value.
 Example:
 
 ```typescript
-name: str = 'Fire';
-typeOfName: str = type(name);  // typeOfName will be 'str'
+let name: str = 'Fire';
+let typeOfName: str = type(name);  // typeOfName will be 'str'
 ```
 
 This documentation provides a basic understanding of predefined functions in Fire. For more detailed information, please refer to the official Fire documentation.
