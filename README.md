@@ -18,9 +18,18 @@ Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL d
 12. [While Loop](#While-Loop)
 13. [Switch statement](#switch-statement)
 14. [Function Declaration](#function-declaration)
-15. [Error Handling](#error-handling)
-16. [Contributing](#contributing)
-17. [License](#license)
+15. [Sum](#sum)
+16 [Length](#length)
+17. [Average](#average)
+18. [Absolute](#absolute)
+19. [Integer](#integer)
+20. [String](#string)
+21. [Max](#max)
+22. [Min](#min)
+23. [Type](#type)
+24. [Error Handling](#error-handling)
+25. [Contributing](#contributing)
+26. [License](#license)
 
 ## Installation
 
@@ -181,6 +190,107 @@ func add(a: num, b: num): num {
   return result;
 }
 ```
+
+### Sum
+
+The `sum()` function is used to calculate the sum of all numbers in a given list.
+
+Example:
+
+```typescript
+numbers: list<num> = [1, 2, 3, 4, 5];
+total: num = sum(numbers);  // total will be 15
+```
+
+### Length
+
+The `len()` function is used to get the length of a given list or string.
+
+Example:
+
+```typescript
+name: str = 'Fire';
+length: num = len(name);  // length will be 4
+```
+
+### Average
+
+The `avg()` function is used to calculate the average of all numbers in a given list.
+
+Example:
+
+```typescript
+numbers: list<num> = [1, 2, 3, 4, 5];
+average: num = avg(numbers);  // average will be 3
+```
+
+### Absolute
+
+The `abs()` function is used to get the absolute value of a number.
+
+Example:
+
+```typescript
+negativeNumber: num = -10;
+absolute: num = abs(negativeNumber);  // absolute will be 10
+```
+
+### Integer
+
+The `int()` function is used to convert a value into an integer.
+
+Example:
+
+```typescript
+number: num = 3.14;
+integer: num = int(number);  // integer will be 3
+```
+
+### String
+
+The `str()` function is used to convert a value into a string.
+
+Example:
+
+```typescript
+number: num = 123;
+string: str = str(number);  // string will be '123'
+```
+
+### Max
+
+The `max()` function is used to get the maximum value in a list of numbers.
+
+Example:
+
+```typescript
+numbers: list<num> = [1, 2, 3, 4, 5];
+maximum: num = max(numbers);  // maximum will be 5
+```
+
+### Min
+
+The `min()` function is used to get the minimum value in a list of numbers.
+
+Example:
+
+```typescript
+numbers: list<num> = [1, 2, 3, 4, 5];
+minimum: num = min(numbers);  // minimum will be 1
+```
+
+### Type
+
+The `type()` function is used to get the data type of a value.
+
+Example:
+
+```typescript
+name: str = 'Fire';
+typeOfName: str = type(name);  // typeOfName will be 'str'
+```
+
+This documentation provides a basic understanding of predefined functions in Fire. For more detailed information, please refer to the official Fire documentation.
 
 ### Error Handling
 
