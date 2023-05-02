@@ -1,4 +1,4 @@
-# Fire: NoSQL Query Language
+# Fire (NoSQL Query Language)
 
 Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL databases such as Firebase Firestore. Drawing inspiration from Rust, Python, TypeScript and Dart, Fire simplifies querying by introducing an easy-to-learn syntax that is meant to feel intuitive to software engineers.
 
@@ -26,10 +26,11 @@ Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL d
 20. [String](#string)
 21. [Max](#max)
 22. [Min](#min)
-23. [Type](#type)
-24. [Error Handling](#error-handling)
-25. [Contributing](#contributing)
-26. [License](#license)
+23. [Round](#round)
+24. [Type](#type)
+25. [Error Handling](#error-handling)
+26. [Contributing](#contributing)
+27. [License](#license)
 
 ## Installation
 
@@ -277,6 +278,16 @@ Example:
 ```typescript
 let numbers: list<num> = [1, 2, 3, 4, 5];
 let minimum: num = min(numbers);  // minimum will be 1
+
+### Round
+
+The `round()` function is used to round off a floating-point number to its nearest integer.
+
+Example:
+
+```typescript
+num number = 3.14;
+num roundedNumber = round(number);  // roundedNumber will be 3
 ```
 
 ### Type
