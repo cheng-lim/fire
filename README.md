@@ -43,23 +43,26 @@ Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL d
 Fire supports several fundamental data types:
 
 ```typescript
-// Numbers (both integers and floats)
+// Number (both integers and floats)
 let x: num = 123.45;
 
-// String and character data
+// String
 let x: str = 'Hello, Fire!';
 
-// Boolean values
+// Boolean
 let x: bool = true;
 
-// Lists (arrays) of values
+// List
 let x: list<num> = [1, 2, 3, 4, 5];
 
-// Maps (dictionaries or objects) of key-value pairs
+// Map
 let x: map<str, num> = {'one': 1, 'two': 2, 'three': 3};
 
-// Dynamic type
+// Dynamic
 let x: any = 'I can be anything!';
+
+// Time
+let x: time = Time.now();
 ```
 
 ### Variable Declaration
@@ -287,8 +290,8 @@ The `round()` function is used to round off a floating-point number to its neare
 Example:
 
 ```typescript
-num number = 3.14;
-num roundedNumber = round(number);  // roundedNumber will be 3
+let number: num = 3.14;
+let roundedNumber: num = round(number);  // roundedNumber will be 3
 ```
 
 ### Type
