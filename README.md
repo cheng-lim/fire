@@ -140,13 +140,13 @@ for (let i:num = 0 < 5) => log(i);
 Fire's additional `for` loop syntax makes looping over lists a breeze.
 
 ```typescript
-let x: fruits<str> = ['Banana', 'Apple', 'Orange'];
+let fruits: list<str> = ['Banana', 'Apple', 'Orange'];
 
 // Iterate over the indexes of fruits and log them.
-for(i: num in fruits) => log(i);
+for(let i: num in fruits) => log(i);
 
 // Iterate over the elements of fruits and log them.
-for(fruit: str of fruits) => log(fruit);
+for(let fruit: str of fruits) => log(fruit);
 ```
 
 
