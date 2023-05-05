@@ -179,16 +179,16 @@ Please note that these are the basic syntax examples. Depending on the exact cap
 
 ### Function Declaration
 
-Functions in Fire are declared using the `func` keyword, followed by the function name, parameters, return type, and the function body enclosed in curly braces `{}`. 
+Functions in Fire are declared using the `fn` keyword, followed by the function name, parameters, return type, and the function body enclosed in curly braces `{}`. 
 
 For example, a function to add two numbers would look like this:
 
 ```typescript
-func add(a: num, b: num): num => return a + b;
+fn add(a: num, b: num): num => return a + b;
 ```
 
 ```typescript
-func add(a: num, b: num): num {
+fn add(a: num, b: num): num {
   let result: num = sum(a+b);  
   return result;
 }
