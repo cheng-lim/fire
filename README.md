@@ -365,8 +365,7 @@ In this example, if an exception is thrown in the `try` block, the control is pa
 [Information about how to contribute to the project.]
 
 ## License
-
-[License information.]
+MIT License
 
 
 
