@@ -51,6 +51,7 @@ let x: map<str, num> = {'one': 1, 'two': 2, 'three': 3};
 
 // Dynamic
 let x: any = 'I can be anything!';
+let x = 'I don't need a type!';
 
 // Time
 let x: time = Time.now();
