@@ -91,7 +91,7 @@ Update the fields in a document with Fire easily.
 collect('countries').doc('Japan').set({'phone':81}); // Updates the 'phone' field in the 'Japan' document to 81.
 ```
 
-### Creating a new document
+### Creating a new collection and document
 
 ```typescript
 let newCountry: map<str, any> = {'name': 'New Country', 'population': 1000};
@@ -101,7 +101,13 @@ collect('countries').add(newCountry);
 ### Ordering results
 
 ```typescript
-let x: list<map<str, any>> = collect('countries').sort('population', method: Sort.descending).limit(10);
+let x: list<map<str, any>> = collect('countries').ascend('population');
+let x: list<map<str, any>> = collect('countries').descend('population').limit(10);
+```
+
+### Fetch multiple collections and documents
+```typescript
+let x: list<map<str, any>> = collect(['countries', nations]); //this fetches and concates 2 collections.
 ```
 
 ## Control flow statements
@@ -127,6 +133,7 @@ if (x > 5) => log('x is greater than 5');
 
 ```typescript
 for (let i:num = 0 < 5) => log(i);
+for(i = 0 < 5) => log(i);
 ```
 
 Fire's additional `for` loop syntax makes looping over lists a breeze.
@@ -136,9 +143,11 @@ let fruits: list<str> = ['Banana', 'Apple', 'Orange'];
 
 // Iterate over the indexes of fruits and log them.
 for(let i: num in fruits) => log(i);
+for(let i in fruits) => log(i);
 
 // Iterate over the elements of fruits and log them.
 for(let fruit: str of fruits) => log(fruit);
+for(let fruit of fruits) => log(fruit);
 ```
 
 
@@ -150,6 +159,10 @@ These `for` loop examples demonstrate how Fire makes it easy to work with lists,
 
 ```typescript
 while (let i: num = 0 < 5) {
+  log(i);
+  i += 1;
+}
+while (let i = 0 < 5) {
   log(i);
   i += 1;
 }
@@ -177,11 +190,16 @@ For example, a function to add two numbers would look like this:
 
 ```typescript
 fn add(a: num, b: num): num => return a + b;
+fn add(a, b) => return a + b;
 ```
 
 ```typescript
 fn add(a: num, b: num): num {
   let result: num = sum(a+b);  
+  return result;
+}
+fn add(a, b) {
+  let result = sum(a+b);  
   return result;
 }
 ```
@@ -303,27 +321,31 @@ This documentation provides a basic understanding of predefined functions in Fir
 ### Rename
 ```typescript
 collect('countries').rename('nations');
-
 collect('countries').doc('UK').rename('United Kingdom');
-
 collect('countries').doc('USA').field('nation_code').rename('country_number');
 ```
 
 ### Duplicate 
 ```typescript
-collect('countries').copyAs('countries_2');
-
-collect('countries').doc('UK').copyAs('Canada');
-
-collect('countries').doc('USA').field('nation_code').copyAs('telephone_number');
+collect('countries').duplicate('countries_2');
+collect('countries').doc('UK').duplicate('Canada');
+collect('countries').doc('USA').field('nation_code').duplicate('telephone_number');
 ```
 
 ### Move
 ```typescript
-
 collect('countries').doc('UK').moveTo('internations');
-
 collect('countries').doc('USA').field('nation_code').moveTo('Asia', 'India');
+```
+
+### Merge
+```typescript
+collect('countries').merge('nations'); //this merges all documents in the `nations` collection, remove `nations` collection.
+```
+
+### Copy
+```typescript
+collect('countries').copy('nations'); //this copies all documents in the `nations` collection, but the `nations` collection remains.
 ```
 
 ## Error Handling
