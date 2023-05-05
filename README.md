@@ -194,6 +194,8 @@ fn add(a: num, b: num): num {
 }
 ```
 
+## Predefined Functions
+
 ### Sum
 
 The `sum()` function is used to calculate the sum of all numbers in a given list.
@@ -306,7 +308,33 @@ let typeOfName: str = type(name);  // typeOfName will be 'str'
 
 This documentation provides a basic understanding of predefined functions in Fire. For more detailed information, please refer to the official Fire documentation.
 
-### Error Handling
+### Rename
+```typescript
+collect('countries').rename('nations');
+
+collect('countries').doc('UK').rename('United Kingdom');
+
+collect('countries').doc('USA').field('nation_code').rename('country_number');
+```
+
+### Duplicate 
+```typescript
+collect('countries').copyAs('countries_2');
+
+collect('countries').doc('UK').copyAs('Canada');
+
+collect('countries').doc('USA').field('nation_code').copyAs('telephone_number');
+```
+
+### Move
+```typescript
+
+collect('countries').doc('UK').moveTo('internations');
+
+collect('countries').doc('USA').field('nation_code').moveTo('Asia', 'India');
+```
+
+## Error Handling
 
 Error handling in Fire is done using the `throw` and `try-catch` statements. 
 
