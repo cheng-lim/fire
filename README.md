@@ -18,19 +18,10 @@ Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL d
 12. [While loop](#While-Loop)
 13. [Switch statement](#switch-statement)
 14. [Function declaration](#function-declaration)
-15. [Sum](#sum)
-16. [Length](#length)
-17. [Average](#average)
-18. [Absolute](#absolute)
-19. [Integer](#integer)
-20. [String](#string)
-21. [Max](#max)
-22. [Min](#min)
-23. [Round](#round)
-24. [Type](#type)
-25. [Error handling](#error-handling)
-26. [Contributing](#contributing)
-27. [License](#license)
+15. [Predefined functions](#predefined-functions)
+16. [Error handling](#error-handling)
+17. [Contributing](#contributing)
+18. [License](#license)
 
 ## Installation
 
