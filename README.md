@@ -1,6 +1,6 @@
 # Fire (NoSQL Query Language)
 
-Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL databases such as Firebase Firestore. Drawing inspiration from Rust, Python, TypeScript and Dart, Fire simplifies querying by introducing an easy-to-learn syntax that is meant to feel intuitive to software engineers.
+Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL databases such as Firebase Firestore. Drawing inspiration from Rust, Python, Julia, TypeScript and Dart, Fire simplifies querying by introducing an easy-to-code syntax that is meant to feel intuitive to software engineers.
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL d
 10. [If statement](#if-statement)
 11. [For loop](#for-loop)
 12. [While loop](#While-Loop)
-13. [Switch statement](#switch-statement)
+13. [See statement](#see-statement)
 14. [Function declaration](#function-declaration)
 15. [Predefined functions](#predefined-functions)
 16. [Error handling](#error-handling)
@@ -35,26 +35,26 @@ Fire supports several fundamental data types:
 
 ```typescript
 // Number (both integers and floats)
-let x: num = 123.45;
+x: num = 123.45;
 
 // String
-let x: str = 'Hello, Fire!';
+x: str = 'Hello, Fire!';
 
 // Boolean
-let x: bool = true;
+x: bool = true;
 
 // List
-let x: list<num> = [1, 2, 3, 4, 5];
+x: list<num> = [1, 2, 3, 4, 5];
 
 // Map
-let x: map<str, num> = {'one': 1, 'two': 2, 'three': 3};
+x: map<str, num> = {'one': 1, 'two': 2, 'three': 3};
 
 // Dynamic
-let x: any = 'I can be anything!';
-let x = 'I don't need a type!';
+x: any = 'I can be anything!';
+x = 'I don't need a type!';
 
 // Time
-let x: time = Time.now();
+x: time = Time.now();
 ```
 
 ### Variable Declaration
@@ -62,7 +62,7 @@ let x: time = Time.now();
 Variables in Fire are declared by specifying the variable name, followed by a colon, the type, and an optional initial value.
 
 ```typescript
-let x: str = '123'; // variable x is assigned the string value of '123'
+x: str = '123'; // variable x is assigned the string value of '123'
 ```
 
 ### Querying
