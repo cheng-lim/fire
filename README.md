@@ -19,6 +19,7 @@ Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL d
 13. [See statement](#see-statement)
 14. [Function declaration](#function-declaration)
 15. [Predefined functions](#predefined-functions)
+16. [Math](#math)
 17. [Contributing](#contributing)
 18. [License](#license)
 
@@ -33,7 +34,15 @@ Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL d
 Fire supports several fundamental data types:
 
 ```typescript
-number, string, boolean, list, map, time.
+data_type = {
+    num: 'number',
+    str: 'string',
+    bool: 'boolean',
+    list: 'list / array',
+    map: 'map / JSON',
+    any: 'dynamic',
+    time: 'timestamp',
+};
 ```
 
 ### Variable Declaration
@@ -78,6 +87,7 @@ Update the fields in a document with Fire easily.
 
 ```typescript
 collect('countries').doc('Japan').set({'phone':81}); // Updates the 'phone' field in the 'Japan' document to 81.
+collect('countries').set({'is_active':true}); // Update a field in all docs
 ```
 
 ### Creating a new collection and document
@@ -91,8 +101,8 @@ collect('countries').add(new_country); // with an auto-generated id
 ### Ordering results
 
 ```typescript
-collect('countries').sort('population', 1);
-collect('countries').sort('population', -1).limit(10);
+collect('countries').ascend('population');
+collect('countries').descend('population').limit(10);
 ```
 
 ### Fetch multiple collections and documents
@@ -302,7 +312,10 @@ name = 'Fire';
 type = type(name);  // typeOfName will be 'str'
 ```
 
-This documentation provides a basic understanding of predefined functions in Fire. For more detailed information, please refer to the official Fire documentation.
+### Pi
+```typescript
+pi(3) = 3.141 // fetch the three digits of pi
+```
 
 ### Rename
 ```typescript
@@ -334,7 +347,23 @@ collect('countries').merge('nations'); //this merges all documents in the `natio
 collect('countries').copy('nations'); //this copies all documents in the `nations` collection, but the `nations` collection remains.
 ```
 
-
+## Math
+```typescript
+    //addition
+    x = 7 + 4;
+    
+    //subtraction
+    x = 6 - 2
+    
+    //mutiplication
+    x = 3 * 2
+    
+    //division
+    x = 3 / 4
+    
+    //base
+    x = x^5
+ ```
 ## Contributing
 
 This is a new project. Feel free to file a pull request.
