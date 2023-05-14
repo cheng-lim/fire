@@ -84,7 +84,8 @@ collect('countries').doc('Japan').set({'phone':81}); // Updates the 'phone' fiel
 
 ```typescript
 new_country = {'phone': 386, 'population': 1000};
-collect('countries').add({id: 'Kingdom of Apple', data: new_country});
+collect('countries').add({'id': 'Kingdom of Apple', 'data': new_country}); // with a predefined id
+collect('countries').add(new_country); // with an auto-generated id
 ```
 
 ### Ordering results
@@ -111,9 +112,12 @@ The `if` statement in Fire can be used to execute a block of code only if a spec
 x = 10;
 if (x > 5) {
   log('x is greater than 5');
+} else {
+  log('incorrect')
 }
 
 if (x > 5) => log('x is greater than 5');
+else => log('incorrect');
 ```
 
 ### For Loop
@@ -161,11 +165,11 @@ The `see` statement is used to select one of many code blocks to be executed.
 
 ```typescript
 x = 'banana';
-x = see(x) => {
-  'apple': true,
-  'banana': false,
-  else: null,
-}
+x = see(x) {
+  'apple' => true;
+  'banana' => false;
+  else => null;
+};
 ```
 Please note that these are the basic syntax examples. Depending on the exact capabilities and features of Fire, there might be variations and additional options available.
 
