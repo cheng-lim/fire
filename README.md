@@ -1,6 +1,6 @@
 # Fire (NoSQL Query Language)
 
-Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL databases such as Firebase Firestore. Drawing inspiration from Rust, Python, Julia, TypeScript and Dart, Fire simplifies querying by introducing an easy-to-code syntax that is meant to feel intuitive to software engineers.
+Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL databases such as Firebase Firestore. Drawing inspiration from Rust, Python, Julia, TypeScript, Dart, and MongoDB Shell, Fire simplifies querying by introducing an easy-to-code syntax that is meant to feel intuitive to software engineers.
 
 ## Table of Contents
 
@@ -19,7 +19,6 @@ Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL d
 13. [See statement](#see-statement)
 14. [Function declaration](#function-declaration)
 15. [Predefined functions](#predefined-functions)
-16. [Error handling](#error-handling)
 17. [Contributing](#contributing)
 18. [License](#license)
 
@@ -34,27 +33,7 @@ Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL d
 Fire supports several fundamental data types:
 
 ```typescript
-// Number (both integers and floats)
-x: num = 123.45;
-
-// String
-x: str = 'Hello, Fire!';
-
-// Boolean
-x: bool = true;
-
-// List
-x: list<num> = [1, 2, 3, 4, 5];
-
-// Map
-x: map<str, num> = {'one': 1, 'two': 2, 'three': 3};
-
-// Dynamic
-x: any = 'I can be anything!';
-x = 'I don't need a type!';
-
-// Time
-x: time = Time.now();
+number, string, boolean, list, map, time.
 ```
 
 ### Variable Declaration
@@ -62,15 +41,20 @@ x: time = Time.now();
 Variables in Fire are declared by specifying the variable name, followed by a colon, the type, and an optional initial value.
 
 ```typescript
-x: str = '123'; // variable x is assigned the string value of '123'
+x = 123; // number type
+x = '123'; // string type
+x = true; // boolean type
+x = []; // list type
+x = {}; // map type
+x = Time.now(); // time type
 ```
 
 ### Querying
 
-Fire queries are simple and straightforward. Use the `collect` function followed by the `doc` function to fetch a document from a collection.
+Fire queries are simple and straightforward.
 
 ```typescript
-let x: map<str, any> = collect('countries').doc('Japan'); // Fetches all the fields in the 'Japan' document.
+collect('countries').doc('Japan'); // Fetches all the fields in the 'Japan' document.
 ```
 
 ### Conditional Query
@@ -78,9 +62,14 @@ let x: map<str, any> = collect('countries').doc('Japan'); // Fetches all the fie
 Filter documents based on conditions with Fire. Apply conditions to specific fields in the documents.
 
 ```typescript
-let x: int = collect('countries').doc('USA').field('gender_ratio').but('gender_ratio' >= 1.2) ?? 0; // Selects the 'gender_ratio' field in the 'USA' document where the 'gender_ratio' field is greater than or equal to 1.2, but if the field value is null `0` will be returned.
+collect('countries').doc('USA').field('gender_ratio').but('gender_ratio' >= 1.2) ?? 0; 
+// Selects the 'gender_ratio' field in the 'USA' document where the 'gender_ratio' field is greater than or equal to 1.2
+// , but if the field value is null `0` will be returned.
 
-let x: list<map<str, any>> = collect('countries').but(('population' >= 1,000,000 and 'continent' == 'Asia') or 'region' == 'East Asia'); // Selects all documents where the 'population' field is greater than or equal to 1,000,000 and 'continent' field is equal to 'Asia', or meanwhile if the 'region' field is equal to 'East Asia'.
+collect('countries').but(('population' >= 1,000,000 and 'continent' == 'Asia') or 'region' == 'East Asia'); 
+// Selects all documents where the 'population' field is greater than or equal to 1,000,000 
+// and 'continent' field is equal to 'Asia', or meanwhile if the 'region' field is equal to 'East Asia'.
+// but method takes in a SQL-like syntax.
 ```
 
 ### Updating
@@ -94,20 +83,20 @@ collect('countries').doc('Japan').set({'phone':81}); // Updates the 'phone' fiel
 ### Creating a new collection and document
 
 ```typescript
-let newCountry: map<str, any> = {'name': 'New Country', 'population': 1000};
-collect('countries').add(newCountry);
+new_country = {'phone': 386, 'population': 1000};
+collect('countries').add({id: 'Kingdom of Apple', data: new_country});
 ```
 
 ### Ordering results
 
 ```typescript
-let x: list<map<str, any>> = collect('countries').ascend('population');
-let x: list<map<str, any>> = collect('countries').descend('population').limit(10);
+collect('countries').sort('population', 1);
+collect('countries').sort('population', -1).limit(10);
 ```
 
 ### Fetch multiple collections and documents
 ```typescript
-let x: list<map<str, any>> = collect(['countries', nations]); //this fetches and concates 2 collections.
+collect(['countries', nations]); //this fetches and concates 2 collections.
 ```
 
 ## Control flow statements
@@ -119,7 +108,7 @@ Fire also supports essential control flow statements like `if`, `for`, `while`, 
 The `if` statement in Fire can be used to execute a block of code only if a specified condition is true.
 
 ```typescript
-let x: num = 10;
+x = 10;
 if (x > 5) {
   log('x is greater than 5');
 }
@@ -132,21 +121,19 @@ if (x > 5) => log('x is greater than 5');
 `for` loop in Fire allows you to execute a block of code a number of times.
 
 ```typescript
-for (let i:num = 0 < 5) => log(i);
-for(i = 0 < 5) => log(i);
+for (i = 0 < 5) => log(i);
+for (i = 10 > 5) => log(i);
 ```
 
 Fire's additional `for` loop syntax makes looping over lists a breeze.
 
 ```typescript
-let fruits: list<str> = ['Banana', 'Apple', 'Orange'];
+fruits = ['Banana', 'Apple', 'Orange'];
 
 // Iterate over the indexes of fruits and log them.
-for(let i: num in fruits) => log(i);
-for(let i in fruits) => log(i);
+for(i in fruits) => log(i);
 
 // Iterate over the elements of fruits and log them.
-for(let fruit: str of fruits) => log(fruit);
 for(let fruit of fruits) => log(fruit);
 ```
 
@@ -158,13 +145,13 @@ These `for` loop examples demonstrate how Fire makes it easy to work with lists,
 `while` loop can be used to execute a block of code as long as a specified condition is true.
 
 ```typescript
-while (let i: num = 0 < 5) {
+while (i = 0 < 5) {
   log(i);
   i += 1;
 }
-while (let i = 0 < 5) {
+while (i = 20 > 5) {
   log(i);
-  i += 1;
+  i -= 1;
 }
 ```
 
@@ -173,11 +160,11 @@ while (let i = 0 < 5) {
 The `see` statement is used to select one of many code blocks to be executed.
 
 ```typescript
-let x: str = 'banana';
-see (x) {
-  case ('apple') => log('Apple is $1');
-  case ('banana') => log('Banana is $2');
-  log('Unknown fruit');
+x = 'banana';
+x = see(x) => {
+  'apple': true,
+  'banana': false,
+  else: null,
 }
 ```
 Please note that these are the basic syntax examples. Depending on the exact capabilities and features of Fire, there might be variations and additional options available.
@@ -189,17 +176,12 @@ Functions in Fire are declared using the `fn` keyword, followed by the function 
 For example, a function to add two numbers would look like this:
 
 ```typescript
-fn add(a: num, b: num): num => return a + b;
 fn add(a, b) => return a + b;
 ```
 
 ```typescript
-fn add(a: num, b: num): num {
-  let result: num = sum(a+b);  
-  return result;
-}
 fn add(a, b) {
-  let result = sum(a+b);  
+  result = sum(a, b);  
   return result;
 }
 ```
@@ -213,8 +195,8 @@ The `sum()` function is used to calculate the sum of all numbers in a given list
 Example:
 
 ```typescript
-let numbers: list<num> = [1, 2, 3, 4, 5];
-let total: num = sum(numbers);  // total will be 15
+numbers = [1, 2, 3, 4, 5];
+total = sum(numbers);  // total will be 15
 ```
 
 ### Length
@@ -224,8 +206,8 @@ The `len()` function is used to get the length of a given list or string.
 Example:
 
 ```typescript
-let name: str = 'Fire';
-let length: num = len(name);  // length will be 4
+name = 'Fire';
+length = len(name);  // length will be 4
 ```
 
 ### Average
@@ -235,8 +217,8 @@ The `avg()` function is used to calculate the average of all numbers in a given 
 Example:
 
 ```typescript
-let numbers: list<num> = [1, 2, 3, 4, 5];
-let average: num = avg(numbers);  // average will be 3
+numbers = [1, 2, 3, 4, 5];
+average = avg(numbers);  // average will be 3
 ```
 
 ### Absolute
@@ -246,8 +228,8 @@ The `abs()` function is used to get the absolute value of a number.
 Example:
 
 ```typescript
-let negativeNumber: num = -10;
-let absolute: num = abs(negativeNumber);  // absolute will be 10
+negativeNumber = -10;
+absolute = abs(negativeNumber);  // absolute will be 10
 ```
 
 ### Integer
@@ -257,8 +239,8 @@ The `int()` function is used to convert a value into an integer.
 Example:
 
 ```typescript
-let number: num = 3.14;
-let integer: num = int(number);  // integer will be 3
+number = 3.14;
+integer = int(number);  // integer will be 3
 ```
 
 ### String
@@ -268,8 +250,8 @@ The `str()` function is used to convert a value into a string.
 Example:
 
 ```typescript
-let number: num = 123;
-let string: str = str(number);  // string will be '123'
+number = 123;
+string = str(number);  // string will be '123'
 ```
 
 ### Max
@@ -279,8 +261,8 @@ The `max()` function is used to get the maximum value in a list of numbers.
 Example:
 
 ```typescript
-let numbers: list<num> = [1, 2, 3, 4, 5];
-let maximum: num = max(numbers);  // maximum will be 5
+numbers = [1, 2, 3, 4, 5];
+maximum = max(numbers);  // maximum will be 5
 ```
 
 ### Min
@@ -290,8 +272,8 @@ The `min()` function is used to get the minimum value in a list of numbers.
 Example:
 
 ```typescript
-let numbers: list<num> = [1, 2, 3, 4, 5];
-let minimum: num = min(numbers);  // minimum will be 1
+numbers = [1, 2, 3, 4, 5];
+minimum = min(numbers);  // minimum will be 1
 ```
 
 ### Round
@@ -301,8 +283,8 @@ The `round()` function is used to round off a floating-point number to its neare
 Example:
 
 ```typescript
-let number: num = 3.14;
-let roundedNumber: num = round(number);  // roundedNumber will be 3
+number = 3.14;
+rounded_number = round(number, -1);  // roundedNumber will be 3.1
 ```
 
 ### Type
@@ -312,8 +294,8 @@ The `type()` function is used to get the data type of a value.
 Example:
 
 ```typescript
-let name: str = 'Fire';
-let typeOfName: str = type(name);  // typeOfName will be 'str'
+name = 'Fire';
+type = type(name);  // typeOfName will be 'str'
 ```
 
 This documentation provides a basic understanding of predefined functions in Fire. For more detailed information, please refer to the official Fire documentation.
@@ -348,35 +330,10 @@ collect('countries').merge('nations'); //this merges all documents in the `natio
 collect('countries').copy('nations'); //this copies all documents in the `nations` collection, but the `nations` collection remains.
 ```
 
-## Error Handling
-
-Error handling in Fire is done using the `throw` and `try-catch` statements. 
-
-- The `throw` statement is used to raise an exception.
-- The `try-catch` block is used to catch and handle exceptions.
-
-Here is an example of a function that throws an exception if the denominator is zero:
-
-```typescript
-func divide(numerator: num, denominator: num): num {
-    if (denominator == 0) => throw Exception('Denominator cannot be zero');
-    else => return numerator / denominator;
-}
-```
-
-To catch and handle this exception, you would use a `try-catch` block:
-
-```typescript
-try => let result:num = divide(10, 0);
-catch(e) => log(e);
-}
-```
-
-In this example, if an exception is thrown in the `try` block, the control is passed to the `catch` block, where the exception is handled by printing the error message.
 
 ## Contributing
 
-[Information about how to contribute to the project.]
+This is a new project. Feel free to file a pull request.
 
 ## License
 MIT License
