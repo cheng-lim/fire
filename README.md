@@ -1,6 +1,6 @@
 # Fire (NoSQL Query Language)
 
-Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL databases such as Firebase Firestore. Drawing inspiration from Rust, Python, Julia, TypeScript, Dart, and MongoDB Shell, Fire simplifies querying by introducing an easy-to-code syntax that is meant to feel intuitive to software engineers.
+Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL databases such as Firebase Firestore. Drawing inspiration from Rust, Python, Julia, JavaScript, Dart, and MongoDB Shell, Fire simplifies querying by introducing an easy-to-code syntax that is meant to feel intuitive to software engineers.
 
 ## Table of Contents
 
