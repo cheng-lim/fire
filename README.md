@@ -10,18 +10,19 @@ Fire is a Domain Specific Language (DSL), designed for making queries to NoSQL d
 4. [Querying](#querying)
 5. [Conditional query](#conditional-query)
 6. [Updating](#updating)
-7. [Creating a new document](#creating-a-new-document)
-8. [Filtering with multiple conditions](#filtering-with-multiple-conditions)
-9. [Ordering results](#ordering-results)
-10. [If statement](#if-statement)
-11. [For loop](#for-loop)
-12. [While loop](#While-Loop)
-13. [See statement](#see-statement)
-14. [Function declaration](#function-declaration)
-15. [Predefined functions](#predefined-functions)
-16. [Math](#math)
-17. [Contributing](#contributing)
-18. [License](#license)
+7. [Creating](#creating)
+8. [Removing](#removing)
+9. [Filtering with multiple conditions](#filtering-with-multiple-conditions)
+10. [Ordering results](#ordering-results)
+11. [If statement](#if-statement)
+12. [For loop](#for-loop)
+13. [While loop](#While-Loop)
+14. [See statement](#see-statement)
+15. [Function declaration](#function-declaration)
+16. [Predefined functions](#predefined-functions)
+17. [Math](#math)
+18. [Contributing](#contributing)
+19. [License](#license)
 
 ## Installation
 
@@ -63,6 +64,9 @@ x = Time.now(); // time type
 Fire queries are simple and straightforward.
 
 ```typescript
+//this fetches and concates 2 collections.
+collect(['countries', nations]); 
+
 // Fetches all the fields in the 'Japan' document. 
 collect('countries').doc('Japan'); 
 
@@ -95,9 +99,11 @@ Update the fields in a document with Fire easily.
 ```typescript
 collect('countries').doc('Japan').set({'phone':81}); // Updates the 'phone' field in the 'Japan' document to 81.
 collect('countries').set({'is_active':true}); // Update a field in all docs
+collect('countries').field('is_active').set(false); // Update a field in all docs
+collect('countries').doc('Japan').field('population').set(1_000_000); // Update a specific field in a doc of a collection.
 ```
 
-### Creating a new collection and document
+### Creating
 
 ```typescript
 new_country = {'phone': 386, 'population': 1000};
@@ -105,16 +111,21 @@ collect('countries').add({'id': 'Kingdom of Apple', 'data': new_country}); // wi
 collect('countries').add(new_country); // with an auto-generated id
 ```
 
+### Deleting
+
+```typescript
+collect('countries').delete(); // Delete an entire collection
+collect('countries').doc('USA').delete(); // Delete a doc of a collection
+collect('countries').doc('USA').field('population').delete(); // Delete a specific field in a certain doc of a collection
+```
+
 ### Ordering results
 
 ```typescript
 collect('countries').ascend('population');
-collect('countries').descend('population').limit(10);
-```
-
-### Fetch multiple collections and documents
-```typescript
-collect(['countries', nations]); //this fetches and concates 2 collections.
+collect('countries').descend('population');
+collect('countries').first(5);
+collect('countries').last(5);
 ```
 
 ## Control flow statements
