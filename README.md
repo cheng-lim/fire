@@ -62,17 +62,6 @@ x = Time.now(); // time type
 
 Fire queries are simple and straightforward.
 
-```python
-// Fetches all the fields in the 'Japan' document. 
-collect('countries').doc('Japan'); 
-
-// Fetches specific documents from the 'countries' collection by their ids.
-collect('countries').doc(['Japan', 'USA', 'UK']);
-
-// Fetches specific fields of certain documents from the 'countries' collection by their ids.
-collect('countries').doc(['Japan', 'USA', 'UK']).field(['population', 'region']);
-```
-
 ```typescript
 // Fetches all the fields in the 'Japan' document. 
 collect('countries').doc('Japan'); 
@@ -88,23 +77,12 @@ collect('countries').doc(['Japan', 'USA', 'UK']).field(['population', 'region'])
 
 Filter documents based on conditions with Fire. Apply conditions to specific fields in the documents.
 
-```python
-collect('countries').doc('USA').field('gender_ratio').but('gender_ratio' >= 1.2) ?? 0; 
-// Selects the 'gender_ratio' field in the 'USA' document where the 'gender_ratio' field is greater than or equal to 1.2
-// , but if the field value is null `0` will be returned.
-
-collect('countries').but(('population' >= 1,000,000 and 'continent' == 'Asia') or 'region' == 'East Asia'); 
-// Selects all documents where the 'population' field is greater than or equal to 1,000,000 
-// and 'continent' field is equal to 'Asia', or meanwhile if the 'region' field is equal to 'East Asia'.
-// but method takes in a SQL-like syntax.
-```
-
 ```typescript
 collect('countries').doc('USA').field('gender_ratio').but('gender_ratio' >= 1.2) ?? 0; 
 // Selects the 'gender_ratio' field in the 'USA' document where the 'gender_ratio' field is greater than or equal to 1.2
 // , but if the field value is null `0` will be returned.
 
-collect('countries').but(('population' >= 1,000,000 and 'continent' == 'Asia') or 'region' == 'East Asia'); 
+collect('countries').but(('population' >= 1_000_000 and 'continent' == 'Asia') or 'region' == 'East Asia'); 
 // Selects all documents where the 'population' field is greater than or equal to 1,000,000 
 // and 'continent' field is equal to 'Asia', or meanwhile if the 'region' field is equal to 'East Asia'.
 // but method takes in a SQL-like syntax.
@@ -188,27 +166,30 @@ These `for` loop examples demonstrate how Fire makes it easy to work with lists,
 `while` loop can be used to execute a block of code as long as a specified condition is true.
 
 ```typescript
+// variable i will be automatically be incremental
 while (i = 0 < 5) {
   log(i);
-  i += 1;
 }
+
+// variable i will be automatically be decremental
 while (i = 20 > 5) {
   log(i);
-  i -= 1;
 }
+
+while (i = 20 > 5) => log(i);
 ```
 
 ### See Statement
 
-The `see` statement is used to select one of many code blocks to be executed.
+The `see` statement is used to select one of many code blocks to be executed. It works similar to Match in Rust and Switch in JavaScript.
 
 ```typescript
 x = 'banana';
-x = see(x) {
-  'apple' => true;
-  'banana' => false;
-  else => null;
-};
+x = see(x, {
+  'apple': true,
+  'banana': false,
+  default: null,
+}); 
 ```
 Please note that these are the basic syntax examples. Depending on the exact capabilities and features of Fire, there might be variations and additional options available.
 
@@ -286,6 +267,17 @@ number = 3.14;
 integer = int(number);  // integer will be 3
 ```
 
+### Number
+
+The `num()` function is used to convert a value into a number.
+
+Example:
+
+```typescript
+string = '3.14';
+number = num(string);  // integer will be 3.14
+```
+
 ### String
 
 The `str()` function is used to convert a value into a string.
@@ -317,6 +309,17 @@ Example:
 ```typescript
 numbers = [1, 2, 3, 4, 5];
 minimum = min(numbers);  // minimum will be 1
+```
+
+### Med
+
+The `med()` function is used to get the median value in a list of numbers.
+
+Example:
+
+```typescript
+numbers = [-1, 12, 30, 49, 105];
+median = med(numbers);  // median will be 30
 ```
 
 ### Round
