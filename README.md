@@ -196,11 +196,7 @@ The `see` statement is used to select one of many code blocks to be executed. It
 
 ```typescript
 x = 'banana';
-x = see(x, {
-  'apple': true,
-  'banana': false,
-  default: null,
-}); 
+x = see(x, {'apple': 1, 'banana': 2}) ?? 3; 
 ```
 Please note that these are the basic syntax examples. Depending on the exact capabilities and features of Fire, there might be variations and additional options available.
 
