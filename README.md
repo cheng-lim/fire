@@ -416,3 +416,8 @@ MIT License
 
 
 
+# Not Yet Implementated
+1. count()
+2. increment() & decrement() a field
+3. enumerate() collections, docs, and fields
+4. Conditional update or delete or create
