@@ -62,13 +62,42 @@ x = Time.now(); // time type
 
 Fire queries are simple and straightforward.
 
+```python
+// Fetches all the fields in the 'Japan' document. 
+collect('countries').doc('Japan'); 
+
+// Fetches specific documents from the 'countries' collection by their ids.
+collect('countries').doc(['Japan', 'USA', 'UK']);
+
+// Fetches specific fields of certain documents from the 'countries' collection by their ids.
+collect('countries').doc(['Japan', 'USA', 'UK']).field(['population', 'region']);
+```
+
 ```typescript
-collect('countries').doc('Japan'); // Fetches all the fields in the 'Japan' document. 
+// Fetches all the fields in the 'Japan' document. 
+collect('countries').doc('Japan'); 
+
+// Fetches specific documents from the 'countries' collection by their ids.
+collect('countries').doc(['Japan', 'USA', 'UK']);
+
+// Fetches specific fields of certain documents from the 'countries' collection by their ids.
+collect('countries').doc(['Japan', 'USA', 'UK']).field(['population', 'region']);
 ```
 
 ### Conditional Query
 
 Filter documents based on conditions with Fire. Apply conditions to specific fields in the documents.
+
+```python
+collect('countries').doc('USA').field('gender_ratio').but('gender_ratio' >= 1.2) ?? 0; 
+// Selects the 'gender_ratio' field in the 'USA' document where the 'gender_ratio' field is greater than or equal to 1.2
+// , but if the field value is null `0` will be returned.
+
+collect('countries').but(('population' >= 1,000,000 and 'continent' == 'Asia') or 'region' == 'East Asia'); 
+// Selects all documents where the 'population' field is greater than or equal to 1,000,000 
+// and 'continent' field is equal to 'Asia', or meanwhile if the 'region' field is equal to 'East Asia'.
+// but method takes in a SQL-like syntax.
+```
 
 ```typescript
 collect('countries').doc('USA').field('gender_ratio').but('gender_ratio' >= 1.2) ?? 0; 
