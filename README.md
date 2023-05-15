@@ -149,7 +149,7 @@ fruits = ['Banana', 'Apple', 'Orange'];
 for(i in fruits) => log(i);
 
 // Iterate over the elements of fruits and log them.
-for(let fruit of fruits) => log(fruit);
+for(fruit of fruits) => log(fruit);
 ```
 
 
