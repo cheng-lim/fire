@@ -64,7 +64,6 @@ Fire queries are simple and straightforward.
 
 ```typescript
 collect('countries').doc('Japan'); // Fetches all the fields in the 'Japan' document. 
-collect(countries).doc(Japan); // If the variables are not declared, they will be converted into strings like 'countries' and 'Japan'.
 ```
 
 ### Conditional Query
