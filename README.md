@@ -67,9 +67,8 @@ Fire queries are simple and straightforward.
 ```typescript
 // Fetches all documents in a collection.
 collect('countries');
-
-// Fetches and concates 2 collections.
-collect(['countries', 'nations']); 
+// or
+collect($countries);
 
 // Fetches all the fields in the 'Japan' document. 
 collect('countries').doc('Japan'); 
