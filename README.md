@@ -53,6 +53,7 @@ Variables in Fire are declared by specifying the variable name, followed by a co
 ```typescript
 x = 123; // number type
 x = '123'; // string type
+x = $123; // string type, $ sign is equivalent to quotes
 x = true; // boolean type
 x = []; // list type
 x = {}; // map type
