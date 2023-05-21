@@ -51,13 +51,13 @@ data_type = {
 Variables in Fire are declared by specifying the variable name, followed by a colon, the type, and an optional initial value.
 
 ```typescript
-let $x = 123; // number type
-let $x = '123'; // string type
-let $x = true; // boolean type
-let $x = []; // list type
-let $x = {}; // map type
-let $x = Time.now(); // time type
-let $x = countries; // this is a database object, which can be either a collection, doc, or a field.
+let $population = 123123123; // number type
+let $country = 'USA'; // string type
+let $xis_active = true; // boolean type
+let $cities = []; // list type
+let $capital_coordinates = {}; // map type
+let $current_date = Time.now(); // time type
+let $countryiesCollection = countries; // this is a database object, which can be either a collection, doc, or a field.
 ```
 
 ### Querying
