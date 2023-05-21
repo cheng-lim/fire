@@ -43,6 +43,7 @@ data_type = {
     map: 'map / JSON',
     any: 'dynamic',
     time: 'timestamp',
+    db: 'database object'
 };
 ```
 
