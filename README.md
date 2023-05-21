@@ -42,7 +42,7 @@ data_type = {
     map: 'map / JSON',
     any: 'dynamic',
     time: 'timestamp',
-    db: 'database object'; collection, document, document key, document data, and field.
+    db: 'database object'; //collection, document, document key, document data, and field are automatically decided based-on the context.
 };
 ```
 
