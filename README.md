@@ -131,7 +131,7 @@ collect(countries).last(5);
 
 ## Control flow statements
 
-Fire also supports essential control flow statements like `if`, `for`, `while`, and `see` to provide more flexibility and control over your operations.
+Fire also supports essential control flow statements like `if`, `iterate`, and `see` to provide more flexibility and control over your operations.
 
 ### If statement
 
