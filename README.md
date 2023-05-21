@@ -51,13 +51,13 @@ data_type = {
 Variables in Fire are declared by specifying the variable name, followed by a colon, the type, and an optional initial value.
 
 ```typescript
-x = 123; // number type
-x = '123'; // string type
-x = $123; // string type, $ sign is equivalent to quotes
-x = true; // boolean type
-x = []; // list type
-x = {}; // map type
-x = Time.now(); // time type
+let $x = 123; // number type
+let $x = '123'; // string type
+let $x = true; // boolean type
+let $x = []; // list type
+let $x = {}; // map type
+let $x = Time.now(); // time type
+let $x = countries; // this is a database object, which can be either a collection, doc, or a field.
 ```
 
 ### Querying
@@ -66,18 +66,16 @@ Fire queries are simple and straightforward.
 
 ```typescript
 // Fetches all documents in a collection.
-collect('countries');
-// or
-collect($countries);
+collect(countries);
 
-// Fetches all the fields in the 'Japan' document. 
-collect('countries').doc('Japan'); 
+// Fetches all the fields in the Japan document. 
+collect(countries).doc(Japan); 
 
-// Fetches specific documents from the 'countries' collection by their ids.
-collect('countries').doc(['Japan', 'USA', 'UK']);
+// Fetches specific documents from the countries collection by their ids.
+collect(countries).doc([Japan, USA, UK]);
 
-// Fetches specific fields of certain documents from the 'countries' collection by their ids.
-collect('countries').doc(['Japan', 'USA', 'UK']).field(['population', 'region']);
+// Fetches specific fields of certain documents from the countries collection by their ids.
+collect(countries).doc([Japan, USA, UK]).field([population, region]);
 ```
 
 ### Conditional Query
@@ -85,13 +83,13 @@ collect('countries').doc(['Japan', 'USA', 'UK']).field(['population', 'region'])
 Filter documents based on conditions with Fire. Apply conditions to specific fields in the documents.
 
 ```typescript
-collect('countries').doc('USA').field('gender_ratio').but('gender_ratio' >= 1.2) ?? 0; 
-// Selects the 'gender_ratio' field in the 'USA' document where the 'gender_ratio' field is greater than or equal to 1.2
+collect(countries).doc(USA).field(gender_ratio).but(gender_ratio >= 1.2) ?? 0; 
+// Selects the gender_ratio field in the USA document where the gender_ratio field is greater than or equal to 1.2
 // , but if the field value is null `0` will be returned.
 
-collect('countries').but(('population' >= 1_000_000 and 'continent' == 'Asia') or 'region' == 'East Asia'); 
+collect(countries).but((population >= 1_000_000 and continent == 'Asia') or region == 'East Asia'); 
 // Selects all documents where the 'population' field is greater than or equal to 1,000,000 
-// and 'continent' field is equal to 'Asia', or meanwhile if the 'region' field is equal to 'East Asia'.
+// and continent field is equal to 'Asia', or meanwhile if the region field is equal to 'East Asia'.
 // but method takes in a SQL-like syntax.
 ```
 
@@ -100,35 +98,35 @@ collect('countries').but(('population' >= 1_000_000 and 'continent' == 'Asia') o
 Update the fields in a document with Fire easily.
 
 ```typescript
-collect('countries').doc('Japan').set({'phone':81}); // Updates the 'phone' field in the 'Japan' document to 81.
-collect('countries').set({'is_active':true}); // Update a field in all docs
-collect('countries').field('is_active').set(false); // Update a field in all docs
-collect('countries').doc('Japan').field('population').set(1_000_000); // Update a specific field in a doc of a collection.
+collect(countries).doc(Japan).set({phone:81}); // Updates the phone field in the 'Japan' document to 81.
+collect(countries).set({is_active:true}); // Update a field in all docs
+collect(countries).field(is_active).set(false); // Update a field in all docs
+collect(countries).doc(Japan).field(population).set(1_000_000); // Update a specific field in a doc of a collection.
 ```
 
 ### Creating
 
 ```typescript
-new_country = {'phone': 386, 'population': 1000};
-collect('countries').add({'id': 'Kingdom of Apple', 'data': new_country}); // with a predefined id
-collect('countries').add(new_country); // with an auto-generated id
+let $new_country = {phone: 386, population: 1000};
+collect(countries).add({id: 'Kingdom of Apple', data: $new_country}); // with a predefined id
+collect(countries).add($new_country); // with an auto-generated id
 ```
 
 ### Deleting
 
 ```typescript
-collect('countries').delete(); // Delete an entire collection
-collect('countries').doc('USA').delete(); // Delete a doc of a collection
-collect('countries').doc('USA').field('population').delete(); // Delete a specific field in a certain doc of a collection
+collect(countries).delete(); // Delete an entire collection
+collect(countries).doc(USA).delete(); // Delete a doc of a collection
+collect(countries).doc(USA).field(population).delete(); // Delete a specific field in a certain doc of a collection
 ```
 
 ### Ordering results
 
 ```typescript
-collect('countries').ascend('population');
-collect('countries').descend('population');
-collect('countries').first(5);
-collect('countries').last(5);
+collect(countries).ascend(population);
+collect(countries).descend(population);
+collect(countries).first(5);
+collect(countries).last(5);
 ```
 
 ## Control flow statements
@@ -140,57 +138,27 @@ Fire also supports essential control flow statements like `if`, `for`, `while`, 
 The `if` statement in Fire can be used to execute a block of code only if a specified condition is true.
 
 ```typescript
-x = 10;
-if (x > 5) {
+let $x = 10;
+if ($x > 5) {
   log('x is greater than 5');
 } else {
   log('incorrect')
 }
 
-if (x > 5) => log('x is greater than 5');
+if ($x > 5) => log('x is greater than 5');
 else => log('incorrect');
 ```
 
-### For Loop
-
-`for` loop in Fire allows you to execute a block of code a number of times.
+### Iteration
 
 ```typescript
-for (i = 0 < 5) => log(i);
-for (i = 10 > 5) => log(i);
-```
-
-Fire's additional `for` loop syntax makes looping over lists a breeze.
-
-```typescript
-fruits = ['Banana', 'Apple', 'Orange'];
+let $fruits = ['Banana', 'Apple', 'Orange'];
 
 // Iterate over the indexes of fruits and log them.
-for(i in fruits) => log(i);
+$fruits.index($i) => log($i);
 
 // Iterate over the elements of fruits and log them.
-for(fruit of fruits) => log(fruit);
-```
-
-
-These `for` loop examples demonstrate how Fire makes it easy to work with lists, providing intuitive syntax for both index-based and element-based iterations.
-
-### While Loop
-
-`while` loop can be used to execute a block of code as long as a specified condition is true.
-
-```typescript
-// variable i will be automatically be incremental
-while (i = 0 < 5) {
-  log(i);
-}
-
-// variable i will be automatically be decremental
-while (i = 20 > 5) {
-  log(i);
-}
-
-while (i = 20 > 5) => log(i);
+$fruits.each($fruit) => log($fruit);
 ```
 
 ### See Statement
@@ -198,10 +166,14 @@ while (i = 20 > 5) => log(i);
 The `see` statement is used to select one of many code blocks to be executed. It works similar to Match in Rust and Switch in JavaScript.
 
 ```typescript
-x = 'banana';
-x = see(x, {'apple': 1, 'banana': 2}) ?? 3; 
+let $x = 'banana';
+$x = see($x) => {
+    123: sum(1, $x);
+    456: abs($x) - 1;
+    'what': 'omg';
+    default: null;
+}; 
 ```
-Please note that these are the basic syntax examples. Depending on the exact capabilities and features of Fire, there might be variations and additional options available.
 
 ### Function Declaration
 
@@ -215,8 +187,8 @@ fn add(a, b) => return a + b;
 
 ```typescript
 fn add(a, b) {
-  result = sum(a, b);  
-  return result;
+  let $result = sum(a, b);  
+  return $result;
 }
 ```
 
@@ -229,8 +201,8 @@ The `sum()` function is used to calculate the sum of all numbers in a given list
 Example:
 
 ```typescript
-numbers = [1, 2, 3, 4, 5];
-total = sum(numbers);  // total will be 15
+let $numbers = [1, 2, 3, 4, 5];
+let $total = sum($numbers);  // total will be 15
 ```
 
 ### Length
@@ -240,8 +212,8 @@ The `len()` function is used to get the length of a given list or string.
 Example:
 
 ```typescript
-name = 'Fire';
-length = len(name);  // length will be 4
+let $name = 'Fire';
+let $length = len($name);  // length will be 4
 ```
 
 ### Average
@@ -251,8 +223,8 @@ The `avg()` function is used to calculate the average of all numbers in a given 
 Example:
 
 ```typescript
-numbers = [1, 2, 3, 4, 5];
-average = avg(numbers);  // average will be 3
+let $numbers = [1, 2, 3, 4, 5];
+let $average = avg($numbers);  // average will be 3
 ```
 
 ### Absolute
@@ -262,8 +234,8 @@ The `abs()` function is used to get the absolute value of a number.
 Example:
 
 ```typescript
-negativeNumber = -10;
-absolute = abs(negativeNumber);  // absolute will be 10
+let $negativeNumber = -10;
+let $absolute = abs($negativeNumber);  // absolute will be 10
 ```
 
 ### Integer
@@ -273,8 +245,8 @@ The `int()` function is used to convert a value into an integer.
 Example:
 
 ```typescript
-number = 3.14;
-integer = int(number);  // integer will be 3
+let $number = 3.14;
+let $integer = int($number);  // integer will be 3
 ```
 
 ### Number
@@ -284,8 +256,8 @@ The `num()` function is used to convert a value into a number.
 Example:
 
 ```typescript
-string = '3.14';
-number = num(string);  // integer will be 3.14
+let $string = '3.14';
+let $number = num($string);  // integer will be 3.14
 ```
 
 ### String
@@ -295,8 +267,8 @@ The `str()` function is used to convert a value into a string.
 Example:
 
 ```typescript
-number = 123;
-string = str(number);  // string will be '123'
+let $number = 123;
+let $string = str($number);  // string will be '123'
 ```
 
 ### Max
@@ -306,8 +278,8 @@ The `max()` function is used to get the maximum value in a list of numbers.
 Example:
 
 ```typescript
-numbers = [1, 2, 3, 4, 5];
-maximum = max(numbers);  // maximum will be 5
+let $numbers = [1, 2, 3, 4, 5];
+let $maximum = max($numbers);  // maximum will be 5
 ```
 
 ### Min
@@ -317,8 +289,8 @@ The `min()` function is used to get the minimum value in a list of numbers.
 Example:
 
 ```typescript
-numbers = [1, 2, 3, 4, 5];
-minimum = min(numbers);  // minimum will be 1
+let $numbers = [1, 2, 3, 4, 5];
+let $minimum = min($numbers);  // minimum will be 1
 ```
 
 ### Med
@@ -328,8 +300,8 @@ The `med()` function is used to get the median value in a list of numbers.
 Example:
 
 ```typescript
-numbers = [-1, 12, 30, 49, 105];
-median = med(numbers);  // median will be 30
+let $numbers = [-1, 12, 30, 49, 105];
+let $median = med($numbers);  // median will be 30
 ```
 
 ### Round
@@ -339,8 +311,8 @@ The `round()` function is used to round off a floating-point number to its neare
 Example:
 
 ```typescript
-number = 3.14;
-rounded_number = round(number, -1);  // roundedNumber will be 3.1
+let $number = 3.14;
+let $rounded_number = round($number, -1);  // roundedNumber will be 3.1
 ```
 
 ### Type
@@ -350,61 +322,61 @@ The `type()` function is used to get the data type of a value.
 Example:
 
 ```typescript
-name = 'Fire';
-type = type(name);  // typeOfName will be 'str'
+let $name = 'Fire';
+let $type = type($name);  // typeOfName will be 'str'
 ```
 
 ### Pi
 ```typescript
-pi(3) = 3.141 // fetch the three digits of pi
+log(pi(3)); // fetch the three digits of pi, which is 3.141
 ```
 
 ### Rename
 ```typescript
-collect('countries').rename('nations');
-collect('countries').doc('UK').rename('United Kingdom');
-collect('countries').doc('USA').field('nation_code').rename('country_number');
+collect(countries).rename('nations');
+collect(countries).doc(UK).rename('United Kingdom');
+collect(countries).doc(USA).field(nation_code).rename('country_number');
 ```
 
 ### Duplicate 
 ```typescript
-collect('countries').duplicate('countries_2');
-collect('countries').doc('UK').duplicate('Canada');
-collect('countries').doc('USA').field('nation_code').duplicate('telephone_number');
+collect(countries).duplicate('countries_2');
+collect(countries).doc(UK).duplicate('Canada');
+collect(countries).doc(USA).field(nation_code).duplicate('telephone_number');
 ```
 
 ### Move
 ```typescript
-collect('countries').doc('UK').moveTo('internations');
-collect('countries').doc('USA').field('nation_code').moveTo('Asia', 'India');
+collect(countries).doc(UK).moveTo('internations');
+collect(countries).doc(USA).field(nation_code).moveTo(Asia, 'India');
 ```
 
 ### Merge
 ```typescript
-collect('countries').merge('nations'); //this merges all documents in the `nations` collection, remove `nations` collection.
+collect(countries).merge(nations); //this merges all documents in the `nations` collection, remove `nations` collection.
 ```
 
 ### Copy
 ```typescript
-collect('countries').copy('nations'); //this copies all documents in the `nations` collection, but the `nations` collection remains.
+collect(countries).copy('nations'); //this copies all documents in the `nations` collection, but the `nations` collection remains.
 ```
 
 ## Math
 ```typescript
     //addition
-    x = 7 + 4;
+    let $x = 7 + 4;
     
     //subtraction
-    x = 6 - 2
+    let $x = 6 - 2
     
     //mutiplication
-    x = 3 * 2
+    let $x = 3 * 2
     
     //division
-    x = 3 / 4
+    let $x = 3 / 4
     
     //base
-    x = x^5
+    let $x = $x^5
  ```
 ## Contributing
 
