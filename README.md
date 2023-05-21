@@ -108,7 +108,7 @@ collect(countries).doc(Japan).field(population).set(1_000_000); // Update a spec
 
 ```typescript
 let $new_country = {phone: 386, population: 1000};
-collect(countries).add({id: 'Kingdom of Apple', data: $new_country}); // with a predefined id
+collect(countries).add({key: 'Kingdom of Apple', data: $new_country}); // with a predefined id
 collect(countries).add($new_country); // with an auto-generated id
 ```
 
