@@ -87,7 +87,7 @@ collect(countries).doc(USA).field(gender_ratio).but(gender_ratio >= 1.2) ?? 0;
 // Selects the gender_ratio field in the USA document where the gender_ratio field is greater than or equal to 1.2
 // , but if the field value is null `0` will be returned.
 
-collect(countries).but((population >= 1_000_000 and continent == 'Asia') or region == 'East Asia'); 
+collect(countries).but([population >= 1_000_000, continent == 'Asia'], region == 'East Asia'); 
 // Selects all documents where the 'population' field is greater than or equal to 1,000,000 
 // and continent field is equal to 'Asia', or meanwhile if the region field is equal to 'East Asia'.
 // but method takes in a SQL-like syntax.
