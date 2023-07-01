@@ -67,15 +67,15 @@ Fire queries are simple and straightforward.
 ```typescript
 // Fetches all documents in a collection.
 collect(countries);
+fire.countries.get();
 
 // Fetches all the fields in the Japan document. 
-collect(countries).doc(Japan); 
+collect(countries).doc(Japan);
+fire.countries[Japan].get();
 
 // Fetches specific documents from the countries collection by their ids.
 collect(countries).doc([Japan, USA, UK]);
-
-// Fetches specific fields of certain documents from the countries collection by their ids.
-collect(countries).doc([Japan, USA, UK]).field([population, region]);
+fire.countries[Japan, USA, UK].get();
 ```
 
 ### Conditional Query
@@ -83,11 +83,8 @@ collect(countries).doc([Japan, USA, UK]).field([population, region]);
 Filter documents based on conditions with Fire. Apply conditions to specific fields in the documents.
 
 ```typescript
-collect(countries).doc(USA).field(gender_ratio).but(gender_ratio >= 1.2) ?? 0; 
-// Selects the gender_ratio field in the USA document where the gender_ratio field is greater than or equal to 1.2
-// , but if the field value is null `0` will be returned.
-
-collect(countries).but([population >= 1_000_000, continent == 'Asia'], region == 'East Asia'); 
+collect(countries).but([population >= 1_000_000, continent == 'Asia'], region == 'East Asia');
+fire.countries.where([population >= 1_000_000, continent == 'Asia'], region == 'East Asia').get();
 // Selects all documents where the 'population' field is greater than or equal to 1,000,000 
 // and continent field is equal to 'Asia', or meanwhile if the region field is equal to 'East Asia'.
 // but method takes in a SQL-like syntax.
@@ -99,34 +96,36 @@ Update the fields in a document with Fire easily.
 
 ```typescript
 collect(countries).doc(Japan).set({phone:81}); // Updates the phone field in the 'Japan' document to 81.
+fire.countries[Japan].set({phone:81});
 collect(countries).set({is_active:true}); // Update a field in all docs
+fire.countries.set({is_active:true});
 collect(countries).field(is_active).set(false); // Update a field in all docs
-collect(countries).doc(Japan).field(population).set(1_000_000); // Update a specific field in a doc of a collection.
+fire.countries.where(is_active).set(false);
 ```
 
 ### Creating
 
 ```typescript
 let $new_country = {phone: 386, population: 1000};
-collect(countries).add({key: 'Kingdom of Apple', data: $new_country}); // with a predefined id
-collect(countries).add($new_country); // with an auto-generated id
+fire.countries.add({key: 'Kingdom of Apple', data: $new_country}); // with a predefined id
+fire.countries.add($new_country); // with an auto-generated id
 ```
 
 ### Deleting
 
 ```typescript
-collect(countries).delete(); // Delete an entire collection
-collect(countries).doc(USA).delete(); // Delete a doc of a collection
-collect(countries).doc(USA).field(population).delete(); // Delete a specific field in a certain doc of a collection
+fire.countries.delete(); // Delete an entire collection
+fire.countries[USA].delete(); // Delete a doc of a collection
+fire.countries[USA].delete(population); // Delete a specific field in a certain doc of a collection
 ```
 
 ### Ordering results
 
 ```typescript
-collect(countries).ascend(population);
-collect(countries).descend(population);
-collect(countries).first(5);
-collect(countries).last(5);
+fire.countries.asc(population).get();
+fire.countries.desc(population).get();
+fire.countries.first(5).get();
+fire.countries.last(5).get();
 ```
 
 ## Control flow statements
